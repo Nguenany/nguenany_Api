@@ -3,10 +3,9 @@ package nguenany.gmail.com.demo.todosimple.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
-import org.springframework.scheduling.config.Task;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
+
 import java.util.Objects;
 
 @Entity
@@ -24,18 +23,17 @@ public class User {
 
     @Column(name = "username", length = 100, nullable = false, unique = true)
     @NotNull
-    @NotEmpty
     /*@Size(min = 3, max = 100)*/
     private String username;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "password", length = 60, nullable = false)
     @NotNull
-    @NotEmpty
     /*@Size(min = 8, max = 60)*/
     private  String password;
 
-   //private List<Task> tasks = new ArrayList<Task>();
+   @OneToMany(mappedBy = "user")
+    private List<Task> tasks = new ArrayList<Task>();
     public User(){
 
     }
